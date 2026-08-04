@@ -2,6 +2,12 @@
   "name": "school-id-system",
   "version": "1.0.0",
   "private": true,
-  "description": "School ID card registration and generation system",
-  "main": "server.js"
+  "type": "module",
+  "description": "Secure school ID card registration and parent-edit portal",
+  "scripts": { "dev": "node server.js", "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "express": "^5.1.0"
+  }
 }

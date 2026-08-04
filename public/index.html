@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>School ID System | Student Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head><body>
+  <header><a class="brand" href="/"><span>✦</span> GREENFIELD <b>ACADEMY</b></a><div class="help">Admissions office · 9:00 AM–4:00 PM</div></header>
+  <main><section class="intro"><p class="eyebrow">2026–27 · STUDENT SERVICES</p><h1>Student ID card<br><em>registration</em></h1><p>Complete the form below. You can review your card before submitting and update your information later through a private link.</p><div class="steps"><span class="on">1&nbsp; Details</span><i></i><span>2&nbsp; Preview</span><i></i><span>3&nbsp; Complete</span></div></section>
+  <section class="layout"><form id="student-form" class="panel"><div class="panel-head"><div><p class="eyebrow">STUDENT PROFILE</p><h2 id="form-title">Registration details</h2></div><span class="required">* Required fields</span></div>
+    <div class="form-grid">
+      <label class="wide">Student full name*<input name="student_name" required placeholder="Enter student's full name"></label>
+      <label>Admission number*<input name="admission_number" required placeholder="e.g. GFA-2026-0142"></label>
+      <label>Roll number*<input name="roll_number" required placeholder="e.g. 18"></label>
+      <label>Class & division*<input name="class_division" required placeholder="e.g. Grade 7 · B"></label>
+      <label>Date of birth*<input name="date_of_birth" type="date" required></label>
+      <label>Blood group*<select name="blood_group" required><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+      <label>Parent / guardian name*<input name="parent_name" required placeholder="Full name"></label>
+      <label>Phone number*<input name="phone_number" required inputmode="tel" placeholder="+91 00000 00000"></label>
+      <label class="wide">Emergency contact*<input name="emergency_contact" required inputmode="tel" placeholder="Name and phone number"></label>
+      <label class="wide">Home address*<textarea name="address" required placeholder="House / street, area, city, PIN code"></textarea></label>
+      <label class="wide">Transport details <input name="transport_details" placeholder="Bus route, pickup point, or ‘Self transport’"></label>
+    </div>
+    <div class="photo-row"><div><p class="field-title">Passport-size photo*</p><p class="hint">A clear, front-facing JPG, PNG, or WEBP. It will be resized automatically.</p></div><label class="upload"><input id="photo" type="file" accept="image/png,image/jpeg,image/webp" required><span id="upload-label">Choose photo</span></label></div>
+    <div id="message" role="status"></div><div class="actions"><button type="button" id="preview" class="secondary">Preview ID card</button><button class="primary" type="submit">Save & get edit link <span>→</span></button></div>
+  </form>
+  <aside class="preview-wrap"><p class="eyebrow">LIVE PREVIEW</p><div id="card" class="id-card"><div class="card-top"><span>GREENFIELD ACADEMY</span><small>STUDENT ID</small></div><div class="photo-box"><img id="card-photo" alt="Student photo"><span id="photo-placeholder">PHOTO</span></div><div class="card-name" data-field="student_name">Student name</div><div class="card-class" data-field="class_division">Class & division</div><div class="card-meta"><div><small>ADM. NO.</small><b data-field="admission_number">—</b></div><div><small>ROLL NO.</small><b data-field="roll_number">—</b></div><div><small>BLOOD</small><b data-field="blood_group">—</b></div></div><div class="card-foot"><span>2026–27</span><span>GREENFIELD.EDU</span></div></div><p class="preview-note">Your card is generated after submission. Check every detail carefully.</p></aside>
+  </section></main>
+  <dialog id="success"><button class="close" aria-label="Close">×</button><p class="eyebrow">SAVED SUCCESSFULLY</p><h2>Your details are received.</h2><p>Save this private edit link. It lets you update your details and photo until the school approves the card.</p><div id="edit-link"></div><button id="copy-link" class="secondary">Copy private edit link</button><button id="download" class="primary">Download ID card PDF</button></dialog>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="/js/app.js"></script>
+</body></html>
