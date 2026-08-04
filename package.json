@@ -1,0 +1,7 @@
+{
+  "name": "school-id-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "School ID card registration and generation system",
+  "main": "server.js"
+}

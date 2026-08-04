@@ -1,0 +1,1 @@
+-- School ID System database schema will be defined here.
