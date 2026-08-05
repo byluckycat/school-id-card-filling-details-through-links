@@ -1,17 +1,34 @@
 # School ID System
 
-A polished parent registration portal that saves student details and passport photos, provides a private edit link, creates a printable ID card PDF, and gives staff a searchable review page.
+A parent registration portal for collecting student details and passport photos, generating printable ID cards, and giving staff a searchable review page.
 
-## Deploy to Vercel + Supabase
+## 1. Set up Supabase
 
-1. In Supabase, open **SQL Editor**, run `database.sql`, then copy the project URL and **service_role** key from **Settings → API**.
-2. In Vercel, import this GitHub repository. In **Settings → Environment Variables**, add every value in `.env.example`. Never put the service-role key in frontend code or commit it to GitHub.
-3. Deploy. Your parent form is at `/`; staff can search records at `/staff.html` using `ADMIN_ACCESS_KEY`.
+1. Create a Supabase project at [supabase.com/dashboard](https://supabase.com/dashboard).
+2. Open **SQL Editor → New query** and paste the complete contents of [`database.sql`](./database.sql). Click **Run**. This creates the `students` table, enables row-level security, and creates the `student-photos` storage bucket.
+3. Open **Project Settings → API**. Copy the **Project URL** and the **service_role secret key**. The service-role key is server-only: never put it in `public/`, browser JavaScript, GitHub, or a `NEXT_PUBLIC_` variable.
 
-## Local run
+The API intentionally uses the service-role key on the server. The database has no public table policy, so parents cannot query all student records from the browser. They can access only the record addressed by their private edit token through the API.
 
-Install Node.js 20+, then run `npm install`, copy `.env.example` to `.env`, fill in the values, and run `npm run dev`.
+## 2. Configure Vercel
 
-## Parent editing
+Import this GitHub repository into Vercel. In **Project Settings → Environment Variables**, add these values for **Production, Preview, and Development**:
 
-After a parent submits, the confirmation screen displays a private edit URL. Anyone holding that URL can edit that one record until staff approves it, so parents should not share it. For production, add SMS/email OTP and a privacy notice before accepting real student data.
+| Name | Value |
+| --- | --- |
+| `SUPABASE_URL` | Your Supabase Project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase service-role secret |
+| `ADMIN_ACCESS_KEY` | A long, random staff-only password |
+| `SITE_URL` | Your Vercel website URL |
+
+Leave **Build Command** and **Output Directory** blank. Set **Root Directory** to `/` and **Framework Preset** to **Other**, then deploy the latest `main` branch.
+
+The parent form is at `/`. The staff search page is at `/staff.html`; staff must enter `ADMIN_ACCESS_KEY`. After a submission, the parent receives a private edit URL that can update the record and photo until the school approves it.
+
+## 3. Local development
+
+Install Node.js 20, run `npm install`, copy `.env.example` to `.env`, fill in the four values, and run `npm run dev`. Open `http://localhost:3000`.
+
+## Privacy and production checklist
+
+Student records and photographs are personal information. Use HTTPS, restrict the staff key, enable Supabase backups, and add a school privacy notice and parent consent before collecting live data. Anyone with a private edit URL can edit that record, so parents must not share their link. Add OTP verification before production use.
